@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Login from './components/Login';
+import PostsList from './components/PostsList';
 
 function App() {
   const [username, setUsername] = useState(null);
@@ -23,16 +24,19 @@ function App() {
     };
     fetch('http://localhost:3000/auth/login', options)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setApiKey(data));
   };
 
   return (
     <div className='App'>
-      <Login
-        handleUsername={handleUsername}
-        handlePassword={handlePassword}
-        handleLogin={handleLogin}
-      />
+      {!apiKey && (
+        <Login
+          handleUsername={handleUsername}
+          handlePassword={handlePassword}
+          handleLogin={handleLogin}
+        />
+      )}
+      {apiKey && <PostsList />}
     </div>
   );
 }
