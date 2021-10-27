@@ -1,14 +1,15 @@
+import { useState } from 'react';
 import React from 'react';
 
-const Login = () => {
+const Login = ({ handleUsername, handlePassword, handleLogin }) => {
   return (
     <div>
       <form>
-        <label for='username'>username</label>
-        <input type='text' name='username' />
-        <label for='password'>password</label>
-        <input type='password' name='password' />
-        <input type='submit' value='login' />
+        <label htmlFor='username'>username</label>
+        <input type='text' name='username' onChange={handleUsername} />
+        <label htmlFor='password'>password</label>
+        <input type='password' name='password' onChange={handlePassword} />
+        <input type='submit' value='login' onClick={handleLogin} />
       </form>
     </div>
   );
