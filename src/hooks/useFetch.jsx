@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 
-const useFetch = (query) => {
+const useFetch = (props) => {
   const [state, setState] = useState({
     loading: true,
     error: false,
-    data: [],
+    data: null,
   });
 
   useEffect(() => {
-    fetch(query.url, query.options)
+    fetch(props.url, props.options)
       .then((res) => {
         if (!res.ok) {
           throw new Error(res.status);
