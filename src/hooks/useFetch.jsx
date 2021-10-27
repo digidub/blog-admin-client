@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const useFetch = ({ query }) => {
   const [apiKey, setApiKey] = useState(null);
@@ -18,7 +18,7 @@ const useFetch = ({ query }) => {
     apiCall();
   }, [query]);
 
-  return <div></div>;
+  return { status, data };
 };
 
 export default useFetch;
