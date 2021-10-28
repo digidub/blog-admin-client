@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const PostCard = ({ id, title, author, posted }) => {
+const PostCard = (props) => {
+  const { id, title, body, author, posted } = props;
   return (
     <Tile id={id}>
-      <StyledLink to={{ pathname: `/post/${id}`, state: title }}>
+      <StyledLink to={{ pathname: `/posts/${id}`, state: { props } }}>
         <div>{title}</div>
         <div>{author}</div>
         <div>{posted}</div>
