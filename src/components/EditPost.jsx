@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { AuthContext } from '../AuthContext';
 
@@ -10,6 +10,22 @@ const EditPost = () => {
   const [editTitle, setEditTitle] = useState(title);
   const [editBody, setEditBody] = useState(body);
   const [auth] = useContext(AuthContext);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const url = `http://localhost:3000${location.pathname}`;
+    const options = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    async function fetchPost() {
+      fetch(url, options)
+        .then((res) => res.json())
+        .then((data) => setData(data));
+    }
+    console.log('mounting');
+    fetchPost();
+  }, []);
 
   const handleTitleChange = (e) => {
     setEditTitle((editTitle) => e.target.value);
