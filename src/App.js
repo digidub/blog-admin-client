@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Login from './components/Login';
 import PostsList from './components/PostsList';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import NewPost from './components/NewPost';
 
 function App() {
   const [username, setUsername] = useState(null);
@@ -27,16 +29,28 @@ function App() {
       .then((data) => setApiKey(data));
   };
 
+  if (!apiKey) {
+    return (
+      <Login
+        handleUsername={handleUsername}
+        handlePassword={handlePassword}
+        handleLogin={handleLogin}
+      />
+    );
+  }
+
   return (
     <div className='App'>
-      {!apiKey && (
-        <Login
-          handleUsername={handleUsername}
-          handlePassword={handlePassword}
-          handleLogin={handleLogin}
-        />
-      )}
-      {apiKey && <PostsList />}
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/'>
+            <PostsList />
+          </Route>
+          <Route exact path='/new'>
+            <NewPost />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
