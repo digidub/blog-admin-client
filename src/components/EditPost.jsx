@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useLocation, useParams } from 'react-router';
+import { AuthContext } from '../AuthContext';
 
 const EditPost = () => {
   const { id } = useParams();
@@ -8,6 +9,7 @@ const EditPost = () => {
   const { title, body } = props;
   const [editTitle, setEditTitle] = useState(title);
   const [editBody, setEditBody] = useState(body);
+  const [auth] = useContext(AuthContext);
 
   const handleTitleChange = (e) => {
     setEditTitle((editTitle) => e.target.value);
@@ -15,6 +17,22 @@ const EditPost = () => {
 
   const handleBodyChange = (e) => {
     setEditBody((editBody) => e.target.value);
+  };
+
+  const handleSaveChanges = (e) => {
+    e.preventDefault();
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${auth}`,
+      },
+      body: JSON.stringify({ title: editTitle, body: editBody }),
+    };
+    fetch(`http://localhost:3000${location.pathname}`, options)
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -29,6 +47,11 @@ const EditPost = () => {
         />
         <label htmlFor='body'>Body:</label>
         <textarea name='body' value={editBody} onChange={handleBodyChange} />
+        <input
+          type='submit'
+          value='save changes'
+          onClick={handleSaveChanges}
+        />
       </form>
     </div>
   );

@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Login from './components/Login';
 import PostsList from './components/PostsList';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NewPost from './components/NewPost';
+import EditPost from './components/EditPost';
+import { AuthContext } from './AuthContext';
 
 function App() {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
-  const [apiKey, setApiKey] = useState(null);
+  const [auth, setAuth] = useState(null);
 
   const handleUsername = (e) => {
     setUsername((username) => e.target.value);
@@ -26,10 +28,10 @@ function App() {
     };
     fetch('http://localhost:3000/auth/login', options)
       .then((res) => res.json())
-      .then((data) => setApiKey(data));
+      .then((data) => setAuth(data.token));
   };
 
-  if (!apiKey) {
+  if (!auth) {
     return (
       <Login
         handleUsername={handleUsername}
@@ -41,16 +43,21 @@ function App() {
 
   return (
     <div className='App'>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/'>
-            <PostsList />
-          </Route>
-          <Route exact path='/new'>
-            <NewPost />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <AuthContext.Provider value={[auth]}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path='/'>
+              <PostsList />
+            </Route>
+            <Route exact path='/new'>
+              <NewPost />
+            </Route>
+            <Route path='/posts/:id'>
+              <EditPost />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </AuthContext.Provider>
     </div>
   );
 }
