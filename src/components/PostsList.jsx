@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import useFetch from '../hooks/useFetch';
 import PostCard from './PostCard';
 
@@ -31,12 +32,18 @@ const PostsList = (props) => {
   const { loading, error, data } = useFetch(query);
 
   return (
-    <div>
+    <PostsTable>
       {loading && <Loading />}
       {error && <Error error={error} />}
       {data && <Data posts={data.posts} />}
-    </div>
+    </PostsTable>
   );
 };
 
 export default PostsList;
+
+const PostsTable = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
