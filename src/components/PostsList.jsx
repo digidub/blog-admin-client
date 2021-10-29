@@ -12,6 +12,7 @@ const Data = ({ posts }) => {
   return posts.map((post) => {
     return (
       <PostCard
+        id={post._id}
         key={post._id}
         body={post.body}
         title={post.title}
@@ -23,7 +24,7 @@ const Data = ({ posts }) => {
 };
 
 const PostsList = (props) => {
-  const url = 'http://localhost:3000/posts';
+  const url = '/posts';
   const options = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },

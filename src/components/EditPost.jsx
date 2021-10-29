@@ -41,11 +41,10 @@ const EditPost = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${auth}`,
       },
       body: JSON.stringify({ title: editTitle, body: editBody }),
     };
-    fetch(`http://localhost:3000${location.pathname}`, options)
+    fetch(`${location.pathname}`, options)
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((err) => console.log(err));

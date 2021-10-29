@@ -27,7 +27,7 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
     };
-    fetch('http://localhost:3000/auth/login', options)
+    fetch('/auth/login', options)
       .then((res) => res.json())
       .then((data) => setAuth(data.token));
   };
