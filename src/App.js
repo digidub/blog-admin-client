@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NewPost from './components/NewPost';
 import EditPost from './components/EditPost';
 import { AuthContext } from './AuthContext';
+import Navbar from './components/NavBar';
 
 function App() {
   const [username, setUsername] = useState(null);
@@ -45,6 +46,7 @@ function App() {
     <div className='App'>
       <AuthContext.Provider value={[auth]}>
         <BrowserRouter>
+          <Navbar />
           <Switch>
             <Route exact path='/'>
               <PostsList />
