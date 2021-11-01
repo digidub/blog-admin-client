@@ -1,5 +1,6 @@
 import React from 'react';
 import useFetch from '../hooks/useFetch';
+import CommentCard from './CommentCard';
 
 const Loading = () => <p>Loading...</p>;
 
@@ -9,7 +10,7 @@ const Data = (props) => {
   console.log(props);
   return props.data.map((comment) => {
     return (
-      <div
+      <CommentCard
         id={comment._id}
         key={comment._id}
         body={comment.body}
