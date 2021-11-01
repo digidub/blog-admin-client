@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { AuthContext } from '../AuthContext';
+import CommentsList from './CommentsList';
 
 const EditPost = () => {
   const { id } = useParams();
@@ -68,6 +69,7 @@ const EditPost = () => {
           onClick={handleSaveChanges}
         />
       </form>
+      <CommentsList url={`${location.pathname}/comments`} />
     </div>
   );
 };
