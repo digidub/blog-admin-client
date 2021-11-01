@@ -1,8 +1,24 @@
 import React from 'react';
 
-const DeleteButton = () => {
+const DeleteButton = ({ url }) => {
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log(url);
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <svg
+      onClick={handleClick}
       xmlns='http://www.w3.org/2000/svg'
       x='0px'
       y='0px'
