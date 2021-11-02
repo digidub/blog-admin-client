@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CommentCard from './CommentCard';
 import server from '../services';
 
-const CommentsList = (props) => {
-  const url = props.url;
-  console.log(url);
+const CommentsList = ({ url }) => {
   const [comments, setComments] = useState(null);
 
   useEffect(() => {
