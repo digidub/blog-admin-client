@@ -1,13 +1,13 @@
 import React from 'react';
 import { Fragment } from 'react';
 
-const Publish = ({ published, updatePublishedState, id }) => {
+const Publish = ({ published, togglePublished, id }) => {
   return (
     <Fragment>
       {published ? (
         <button
           onClick={(e) => {
-            updatePublishedState(id);
+            togglePublished(id);
             e.preventDefault();
           }}
         >
@@ -16,7 +16,7 @@ const Publish = ({ published, updatePublishedState, id }) => {
       ) : (
         <button
           onClick={(e) => {
-            updatePublishedState(id);
+            togglePublished(id);
             e.preventDefault();
           }}
         >

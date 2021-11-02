@@ -5,8 +5,7 @@ import DeleteButton from './DeleteButton';
 import Publish from './Publish';
 
 const PostCard = (props) => {
-  const { id, title, published, posted, deletePost, updatePublishedState } =
-    props;
+  const { id, title, published, posted, deletePost, togglePublished } = props;
 
   return (
     <Tile id={id}>
@@ -16,7 +15,7 @@ const PostCard = (props) => {
         <div>
           <Publish
             published={published}
-            updatePublishedState={updatePublishedState}
+            togglePublished={togglePublished}
             id={id}
           />
         </div>

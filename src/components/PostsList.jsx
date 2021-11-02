@@ -26,7 +26,7 @@ const PostsList = (props) => {
           posted={post.datePosted}
           published={post.published}
           deletePost={deletePost}
-          updatePublishedState={updatePublishedState}
+          togglePublished={togglePublished}
         />
       );
     });
@@ -38,7 +38,7 @@ const PostsList = (props) => {
       .then(setPosts((posts) => posts.filter((post) => post._id !== id)));
   };
 
-  const updatePublishedState = (id) => {
+  const togglePublished = (id) => {
     const post = posts.find((p) => p._id === id);
     const updatedPost = { ...post, published: !post.published };
     const postUrl = `/posts/${id}`;
