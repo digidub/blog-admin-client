@@ -23,10 +23,6 @@ const EditPost = () => {
     setEditTitle((editTitle) => e.target.value);
   };
 
-  const handleBodyChange = (e) => {
-    setEditBody((editBody) => e.target.value);
-  };
-
   const handleSaveChanges = (e) => {
     const updatedPost = { ...data, title: editTitle, body: editBody };
     server.update(url, updatedPost).then((response) => console.log(response));
