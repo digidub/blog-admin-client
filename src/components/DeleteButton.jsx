@@ -1,10 +1,10 @@
 import React from 'react';
 
-const DeleteButton = ({ deletePost, id }) => {
+const DeleteButton = ({ deleteFunction, id }) => {
   return (
     <svg
       onClick={(e) => {
-        deletePost(id);
+        deleteFunction(id);
         e.preventDefault();
       }}
       xmlns='http://www.w3.org/2000/svg'
