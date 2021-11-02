@@ -24,9 +24,14 @@ const PostsList = (props) => {
           title={post.title}
           author={post.author.username}
           posted={post.datePosted}
+          removeFromState={removePostFromState}
         />
       );
     });
+
+  const removePostFromState = (id) => {
+    setPosts((posts) => posts.filter((post) => post._id !== id));
+  };
 
   return <PostsTable>{posts && postsList()}</PostsTable>;
 };

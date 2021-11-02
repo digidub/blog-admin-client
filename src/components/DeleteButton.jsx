@@ -1,23 +1,16 @@
 import React from 'react';
+import server from '../services';
 
-const DeleteButton = ({ url }) => {
+const DeleteButton = ({ url, remove, id }) => {
   const handleClick = (e) => {
-    e.preventDefault();
     console.log(url);
-    const options = {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    fetch(url, options)
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    server.remove(url).then(remove(e.target.parentNode.id));
+    e.preventDefault();
   };
 
   return (
     <svg
+      id={id}
       onClick={handleClick}
       xmlns='http://www.w3.org/2000/svg'
       x='0px'

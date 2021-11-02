@@ -4,17 +4,22 @@ import styled from 'styled-components';
 import DeleteButton from './DeleteButton';
 
 const PostCard = (props) => {
-  const { id, title, body, author, posted } = props;
+  const { id, title, published, posted, removeFromState } = props;
 
   return (
     <Tile id={id}>
       <StyledLink to={{ pathname: `/posts/${id}`, state: { props } }}>
         <div>{title}</div>
-        <div>{author}</div>
         <div>{posted}</div>
-        <div>Publish</div>
         <div>
-          <DeleteButton url={`/posts/${id}`} />
+          {published ? <button>Unpublish</button> : <button>Publish</button>}
+        </div>
+        <div>
+          <DeleteButton
+            url={`/posts/${id}`}
+            removeFromState={removeFromState}
+            id={id}
+          />
         </div>
       </StyledLink>
     </Tile>
@@ -32,7 +37,7 @@ const Tile = styled.div`
 
 const StyledLink = styled(Link)`
   display: grid;
-  grid-template-columns: repeat(5, 20%);
+  grid-template-columns: repeat(4, 25%);
   &:focus,
   &:hover,
   &:visited,

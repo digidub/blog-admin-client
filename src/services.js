@@ -5,7 +5,7 @@ const fetchAll = (url) => {
       'Content-Type': 'application/json',
     },
   };
-  fetch(url, options)
+  return fetch(url, options)
     .then((res) => res.json())
     .then((data) => data)
     .catch((err) => console.log(err));
@@ -46,7 +46,7 @@ const remove = (url) => {
       'Content-Type': 'application/json',
     },
   };
-  fetch(url, options)
+  return fetch(url, options)
     .then((res) => res.json())
     .then((data) => data)
     .catch((err) => console.log(err));
