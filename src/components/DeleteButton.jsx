@@ -1,17 +1,12 @@
 import React from 'react';
-import server from '../services';
 
-const DeleteButton = ({ url, remove, id }) => {
-  const handleClick = (e) => {
-    console.log(url);
-    server.remove(url).then(remove(e.target.parentNode.id));
-    e.preventDefault();
-  };
-
+const DeleteButton = ({ deletePost, id }) => {
   return (
     <svg
-      id={id}
-      onClick={handleClick}
+      onClick={(e) => {
+        deletePost(id);
+        e.preventDefault();
+      }}
       xmlns='http://www.w3.org/2000/svg'
       x='0px'
       y='0px'

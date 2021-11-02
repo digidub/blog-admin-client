@@ -14,9 +14,8 @@ const PostsList = (props) => {
     });
   }, []);
 
-  const postsList = () =>
+  const listPosts = () =>
     posts.map((post) => {
-      console.log(post);
       return (
         <PostCard
           id={post._id}
@@ -26,14 +25,17 @@ const PostsList = (props) => {
           author={post.author.username}
           posted={post.datePosted}
           published={post.published}
-          removeFromState={removePostFromState}
+          deletePost={deletePost}
           updatePublishedState={updatePublishedState}
         />
       );
     });
 
-  const removePostFromState = (id) => {
-    setPosts((posts) => posts.filter((post) => post._id !== id));
+  const deletePost = (id) => {
+    const postUrl = `/posts/${id}`;
+    server
+      .remove(postUrl)
+      .then(setPosts((posts) => posts.filter((post) => post._id !== id)));
   };
 
   const updatePublishedState = (id) => {
@@ -45,7 +47,7 @@ const PostsList = (props) => {
     });
   };
 
-  return <PostsTable>{posts && postsList()}</PostsTable>;
+  return <PostsTable>{posts && listPosts()}</PostsTable>;
 };
 
 export default PostsList;

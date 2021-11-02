@@ -5,14 +5,8 @@ import DeleteButton from './DeleteButton';
 import Publish from './Publish';
 
 const PostCard = (props) => {
-  const {
-    id,
-    title,
-    published,
-    posted,
-    removeFromState,
-    updatePublishedState,
-  } = props;
+  const { id, title, published, posted, deletePost, updatePublishedState } =
+    props;
 
   return (
     <Tile id={id}>
@@ -27,11 +21,7 @@ const PostCard = (props) => {
           />
         </div>
         <div>
-          <DeleteButton
-            url={`/posts/${id}`}
-            removeFromState={removeFromState}
-            id={id}
-          />
+          <DeleteButton url={`/posts/${id}`} deletePost={deletePost} id={id} />
         </div>
       </StyledLink>
     </Tile>
