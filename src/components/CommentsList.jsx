@@ -1,42 +1,34 @@
-import React from 'react';
-import useFetch from '../hooks/useFetch';
+import React, { useEffect, useState } from 'react';
 import CommentCard from './CommentCard';
-
-const Loading = () => <p>Loading...</p>;
-
-const Error = (error) => <p>Oops! Something went wrong: {error}</p>;
-
-const Data = (props) => {
-  console.log(props);
-  return props.data.map((comment) => {
-    return (
-      <CommentCard
-        id={comment._id}
-        key={comment._id}
-        body={comment.body}
-        email={comment.email}
-        posted={comment.datePosted}
-      />
-    );
-  });
-};
+import server from '../services';
 
 const CommentsList = (props) => {
   const url = props.url;
-  const options = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
-  const query = { url, options };
-  const { loading, error, data } = useFetch(query);
+  const [comments, setComments] = useState(null);
 
-  return (
-    <div>
-      {loading && <Loading />}
-      {error && <Error error={error} />}
-      {data && <Data data={data} />}
-    </div>
-  );
+  useEffect(() => {
+    server.fetchAll(url).then((response) => {
+      console.log(response);
+      setComments(response);
+    });
+  }, []);
+
+  const listComments = () =>
+    comments.map((comment) => {
+      return (
+        <CommentCard
+          id={comment._id}
+          key={comment._id}
+          body={comment.body}
+          email={comment.email}
+          datePosted={comment.datePosted}
+        />
+      );
+    });
+
+  if (comments?.length < 1) return <div>No Comments</div>;
+
+  return <div>{comments && listComments()}</div>;
 };
 
 export default CommentsList;

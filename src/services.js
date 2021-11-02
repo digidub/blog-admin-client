@@ -11,6 +11,16 @@ const fetchAll = (url) => {
     .catch((err) => console.log(err));
 };
 
+const fetchPost = (url) => {
+  const options = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  return fetch(url, options)
+    .then((data) => data)
+    .catch((err) => console.log(err));
+};
+
 const create = (url, title, body) => {
   const options = {
     method: 'GET',
@@ -25,15 +35,15 @@ const create = (url, title, body) => {
     .catch((err) => console.log(err));
 };
 
-const update = (url, title, body) => {
+const update = (url, newObject) => {
   const options = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ title, body }),
+    body: JSON.stringify(newObject),
   };
-  fetch(url, options)
+  return fetch(url, options)
     .then((res) => res.json())
     .then((data) => data)
     .catch((err) => console.log(err));
@@ -52,4 +62,4 @@ const remove = (url) => {
     .catch((err) => console.log(err));
 };
 
-export default { fetchAll, create, update, remove };
+export default { fetchAll, fetchPost, create, update, remove };
