@@ -1,33 +1,22 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router';
-import { AuthContext } from '../AuthContext';
 import CommentsList from './CommentsList';
 import { Editor } from '@tinymce/tinymce-react';
+import server from '../services';
 
 const EditPost = () => {
   const { id } = useParams();
   const location = useLocation();
-  const { props } = location.state;
-  const { title, body } = props;
+  const { post } = location.state;
+  const { title, body } = post;
   const [editTitle, setEditTitle] = useState(title);
   const [editBody, setEditBody] = useState(body);
-  const [auth] = useContext(AuthContext);
   const [data, setData] = useState(null);
   const editorRef = useRef(null);
+  const url = `${location.pathname}`;
 
   useEffect(() => {
-    const url = `http://localhost:3000${location.pathname}`;
-    const options = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    async function fetchPost() {
-      fetch(url, options)
-        .then((res) => res.json())
-        .then((data) => setData(data));
-    }
-    console.log('mounting');
-    fetchPost();
+    server.fetchPost(url).then((response) => setData(response));
   }, []);
 
   const handleTitleChange = (e) => {
@@ -39,18 +28,9 @@ const EditPost = () => {
   };
 
   const handleSaveChanges = (e) => {
+    const updatedPost = { ...data, title: editTitle, body: editBody };
+    server.update(url, updatedPost).then((response) => console.log(response));
     e.preventDefault();
-    const options = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ title: editTitle, body: editBody }),
-    };
-    fetch(`${location.pathname}`, options)
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
   };
 
   return (
@@ -67,11 +47,11 @@ const EditPost = () => {
         <Editor
           apiKey={process.env.REACT_APP_TinyCloud}
           onInit={(evt, editor) => (editorRef.current = editor)}
-          initialValue={editBody}
           value={editBody}
           onEditorChange={(newValue, editor) => setEditBody(newValue)}
           init={{
-            height: 500,
+            height: 200,
+            width: 600,
             menubar: false,
             plugins: [
               'advlist autolink lists link image charmap print preview anchor',
