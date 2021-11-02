@@ -16,6 +16,7 @@ const PostsList = (props) => {
 
   const postsList = () =>
     posts.map((post) => {
+      console.log(post);
       return (
         <PostCard
           id={post._id}
@@ -24,13 +25,24 @@ const PostsList = (props) => {
           title={post.title}
           author={post.author.username}
           posted={post.datePosted}
+          published={post.published}
           removeFromState={removePostFromState}
+          updatePublishedState={updatePublishedState}
         />
       );
     });
 
   const removePostFromState = (id) => {
     setPosts((posts) => posts.filter((post) => post._id !== id));
+  };
+
+  const updatePublishedState = (id) => {
+    const post = posts.find((p) => p._id === id);
+    const updatedPost = { ...post, published: !post.published };
+    const postUrl = `/posts/${id}`;
+    server.update(postUrl, updatedPost).then((returnedPost) => {
+      setPosts(posts.map((post) => (post._id !== id ? post : updatedPost)));
+    });
   };
 
   return <PostsTable>{posts && postsList()}</PostsTable>;

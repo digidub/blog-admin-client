@@ -2,9 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import DeleteButton from './DeleteButton';
+import Publish from './Publish';
 
 const PostCard = (props) => {
-  const { id, title, published, posted, removeFromState } = props;
+  const {
+    id,
+    title,
+    published,
+    posted,
+    removeFromState,
+    updatePublishedState,
+  } = props;
 
   return (
     <Tile id={id}>
@@ -12,7 +20,11 @@ const PostCard = (props) => {
         <div>{title}</div>
         <div>{posted}</div>
         <div>
-          {published ? <button>Unpublish</button> : <button>Publish</button>}
+          <Publish
+            published={published}
+            updatePublishedState={updatePublishedState}
+            id={id}
+          />
         </div>
         <div>
           <DeleteButton
