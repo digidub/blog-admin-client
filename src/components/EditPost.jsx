@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useParams } from 'react-router';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 import CommentsList from './CommentsList';
 import server from '../services';
 import PostEditor from './PostEditor';
 
 const EditPost = () => {
-  const { id } = useParams();
   const location = useLocation();
   const { post } = location.state;
   const { title, body } = post;

@@ -5,7 +5,6 @@ import PostEditor from './PostEditor';
 const NewPost = () => {
   const [editTitle, setEditTitle] = useState();
   const [editBody, setEditBody] = useState();
-  const [data, setData] = useState(null);
 
   const handleTitleChange = (e) => {
     setEditTitle((editTitle) => e.target.value);
