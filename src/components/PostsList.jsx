@@ -1,44 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import useFetch from '../hooks/useFetch';
 import PostCard from './PostCard';
-
-const Loading = () => <p>Loading...</p>;
-
-const Error = (error) => <p>Oops! Something went wrong: {error}</p>;
-
-const Data = ({ posts }) => {
-  console.log(posts);
-  return posts.map((post) => {
-    return (
-      <PostCard
-        id={post._id}
-        key={post._id}
-        body={post.body}
-        title={post.title}
-        author={post.author.username}
-        posted={post.datePosted}
-      />
-    );
-  });
-};
+import server from '../services';
 
 const PostsList = (props) => {
+  const [posts, setPosts] = useState(null);
   const url = '/posts';
-  const options = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
-  const query = { url, options };
-  const { loading, error, data } = useFetch(query);
 
-  return (
-    <PostsTable>
-      {loading && <Loading />}
-      {error && <Error error={error} />}
-      {data && <Data posts={data.posts} />}
-    </PostsTable>
-  );
+  useEffect(() => {
+    server.fetchAll(url).then((data) => {
+      console.log(data.posts);
+      setPosts(data.posts);
+    });
+  }, []);
+
+  const postsList = () =>
+    posts.map((post) => {
+      return (
+        <PostCard
+          id={post._id}
+          key={post._id}
+          body={post.body}
+          title={post.title}
+          author={post.author.username}
+          posted={post.datePosted}
+        />
+      );
+    });
+
+  return <PostsTable>{posts && postsList()}</PostsTable>;
 };
 
 export default PostsList;
