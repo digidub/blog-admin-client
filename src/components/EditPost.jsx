@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router';
 import CommentsList from './CommentsList';
-import { Editor } from '@tinymce/tinymce-react';
 import server from '../services';
+import PostEditor from './PostEditor';
 
 const EditPost = () => {
   const { id } = useParams();
@@ -12,7 +12,6 @@ const EditPost = () => {
   const [editTitle, setEditTitle] = useState(title);
   const [editBody, setEditBody] = useState(body);
   const [data, setData] = useState(null);
-  const editorRef = useRef(null);
   const url = `${location.pathname}`;
 
   useEffect(() => {
@@ -40,29 +39,7 @@ const EditPost = () => {
           onChange={handleTitleChange}
         />
         <label htmlFor='body'>Body:</label>
-        <Editor
-          apiKey={process.env.REACT_APP_TinyCloud}
-          onInit={(evt, editor) => (editorRef.current = editor)}
-          value={editBody}
-          onEditorChange={(newValue, editor) => setEditBody(newValue)}
-          init={{
-            height: 200,
-            width: 600,
-            menubar: false,
-            plugins: [
-              'advlist autolink lists link image charmap print preview anchor',
-              'searchreplace visualblocks code fullscreen',
-              'insertdatetime media table paste code help wordcount',
-            ],
-            toolbar:
-              'undo redo | formatselect | ' +
-              'bold italic backcolor | alignleft aligncenter ' +
-              'alignright alignjustify | bullist numlist outdent indent | ' +
-              'removeformat | help',
-            content_style:
-              'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-          }}
-        />
+        <PostEditor editBody={editBody} setEditBody={setEditBody} />
         <input
           type='submit'
           value='save changes'
