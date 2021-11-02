@@ -25,13 +25,13 @@ const PostsList = (props) => {
           author={post.author.username}
           posted={post.datePosted}
           published={post.published}
-          deletePost={deletePost}
+          deleteFunction={deleteFunction}
           togglePublished={togglePublished}
         />
       );
     });
 
-  const deletePost = (id) => {
+  const deleteFunction = (id) => {
     const postUrl = `/posts/${id}`;
     server
       .remove(postUrl)

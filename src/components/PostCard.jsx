@@ -5,8 +5,15 @@ import DeleteButton from './DeleteButton';
 import Publish from './Publish';
 
 const PostCard = (props) => {
-  const { id, title, body, published, posted, deletePost, togglePublished } =
-    props;
+  const {
+    id,
+    title,
+    body,
+    published,
+    posted,
+    deleteFunction,
+    togglePublished,
+  } = props;
   const post = { id, title, body, published };
 
   return (
@@ -27,7 +34,7 @@ const PostCard = (props) => {
           />
         </div>
         <div>
-          <DeleteButton url={`/posts/${id}`} deletePost={deletePost} id={id} />
+          <DeleteButton deleteFunction={deleteFunction} id={id} />
         </div>
       </StyledLink>
     </Tile>
