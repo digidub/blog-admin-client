@@ -5,11 +5,18 @@ import DeleteButton from './DeleteButton';
 import Publish from './Publish';
 
 const PostCard = (props) => {
-  const { id, title, published, posted, deletePost, togglePublished } = props;
+  const { id, title, body, published, posted, deletePost, togglePublished } =
+    props;
+  const post = { id, title, body, published };
 
   return (
     <Tile id={id}>
-      <StyledLink to={{ pathname: `/posts/${id}`, state: { props } }}>
+      <StyledLink
+        to={{
+          pathname: `/posts/${id}`,
+          state: { post },
+        }}
+      >
         <div>{title}</div>
         <div>{posted}</div>
         <div>
