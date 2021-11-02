@@ -12,7 +12,8 @@ const PostEditor = ({ editBody, setEditBody }) => {
       value={editBody}
       onEditorChange={(newValue, editor) => setEditBody(newValue)}
       init={{
-        height: 500,
+        height: 300,
+        width: 600,
         menubar: false,
         plugins: [
           'advlist autolink lists link image charmap print preview anchor',
