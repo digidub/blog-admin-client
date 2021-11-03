@@ -11,7 +11,7 @@ const Navbar = () => {
             exact
             to='/'
             activeStyle={{
-              color: 'palevioletred',
+              color: '#006CAA',
             }}
           >
             Dashboard
@@ -22,7 +22,7 @@ const Navbar = () => {
             exact
             to='/new'
             activeStyle={{
-              color: 'palevioletred',
+              color: '#006CAA',
             }}
           >
             New Post
@@ -74,7 +74,7 @@ const StyledLink = styled(NavLink)`
     text-decoration: none;
   }
   &:hover {
-    color: palevioletred;
-    transition: all 0.5s ease;
+    color: #006caa;
+    transition: all 0.2s ease;
   }
 `;
