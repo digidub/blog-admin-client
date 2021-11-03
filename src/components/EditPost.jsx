@@ -4,7 +4,7 @@ import CommentsList from './CommentsList';
 import server from '../services';
 import PostEditor from './PostEditor';
 import Header from './Header';
-import styled from 'styled-components';
+import { TitleInput } from '../commonStyles';
 
 const EditPost = () => {
   const location = useLocation();
@@ -53,11 +53,3 @@ const EditPost = () => {
 };
 
 export default EditPost;
-
-const TitleInput = styled.input`
-  border: 1px solid #ccc;
-  font-size: 20px;
-  width: 98%;
-  text-decoration: none;
-  padding: 10px 0 10px 10px;
-`;

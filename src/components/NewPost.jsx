@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { TitleInput } from '../commonStyles';
 import server from '../services';
+import Header from './Header';
 import PostEditor from './PostEditor';
 
 const NewPost = () => {
@@ -18,15 +20,21 @@ const NewPost = () => {
 
   return (
     <div>
-      <label htmlFor='title'>Title:</label>
-      <input
-        type='text'
-        name='title'
-        value={editTitle}
-        onChange={handleTitleChange}
-      />
-      <PostEditor editBody={editBody} setEditBody={setEditBody} />
-      <input type='submit' value='save changes' onClick={handleSaveChanges} />
+      <Header title='New Post' />
+      <form>
+        <TitleInput
+          type='text'
+          name='title'
+          value={editTitle}
+          onChange={handleTitleChange}
+        />
+        <PostEditor editBody={editBody} setEditBody={setEditBody} />
+        <input
+          type='submit'
+          value='save changes'
+          onClick={handleSaveChanges}
+        />
+      </form>
     </div>
   );
 };
