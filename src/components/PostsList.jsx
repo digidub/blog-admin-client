@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PostCard from './PostCard';
 import server from '../services';
+import Header from './Header';
 
 const PostsList = (props) => {
   const [posts, setPosts] = useState(null);
@@ -47,7 +48,12 @@ const PostsList = (props) => {
     });
   };
 
-  return <PostsTable>{posts && listPosts()}</PostsTable>;
+  return (
+    <div>
+      <Header title='Posts' />
+      <PostsTable>{posts && listPosts()}</PostsTable>
+    </div>
+  );
 };
 
 export default PostsList;
