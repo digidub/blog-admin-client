@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import DeleteButton from './DeleteButton';
-import Publish from './Publish';
+import PublishButton from './PublishButton';
 import { formatRelative, subDays } from 'date-fns';
 
 const PostCard = (props) => {
@@ -33,7 +33,7 @@ const PostCard = (props) => {
         <Title>{title}</Title>
         <DatePosted>{postedDate()}</DatePosted>
         <div>
-          <Publish
+          <PublishButton
             published={published}
             togglePublished={togglePublished}
             id={id}

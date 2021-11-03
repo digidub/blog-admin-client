@@ -1,7 +1,7 @@
 import React from 'react';
 import { Fragment } from 'react';
 
-const Publish = ({ published, togglePublished, id }) => {
+const PublishButton = ({ published, togglePublished, id }) => {
   return (
     <Fragment>
       {published ? (
@@ -27,4 +27,4 @@ const Publish = ({ published, togglePublished, id }) => {
   );
 };
 
-export default Publish;
+export default PublishButton;
