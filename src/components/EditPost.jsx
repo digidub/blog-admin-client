@@ -3,6 +3,8 @@ import { useLocation } from 'react-router';
 import CommentsList from './CommentsList';
 import server from '../services';
 import PostEditor from './PostEditor';
+import Header from './Header';
+import styled from 'styled-components';
 
 const EditPost = () => {
   const location = useLocation();
@@ -29,15 +31,14 @@ const EditPost = () => {
 
   return (
     <div>
+      <Header title='Edit Post' />
       <form>
-        <label htmlFor='title'>Title:</label>
-        <input
+        <TitleInput
           type='text'
           name='title'
           value={editTitle}
           onChange={handleTitleChange}
         />
-        <label htmlFor='body'>Body:</label>
         <PostEditor editBody={editBody} setEditBody={setEditBody} />
         <input
           type='submit'
@@ -45,9 +46,18 @@ const EditPost = () => {
           onClick={handleSaveChanges}
         />
       </form>
+      <Header title='Comments' />
       <CommentsList url={`${location.pathname}/comments`} />
     </div>
   );
 };
 
 export default EditPost;
+
+const TitleInput = styled.input`
+  border: 1px solid #ccc;
+  font-size: 20px;
+  width: 98%;
+  text-decoration: none;
+  padding: 10px 0 10px 10px;
+`;
