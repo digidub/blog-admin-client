@@ -10,8 +10,8 @@ const PostsList = (props) => {
 
   useEffect(() => {
     server.fetchAll(url).then((data) => {
-      console.log(data.posts);
-      setPosts(data.posts);
+      console.log(data);
+      setPosts(data);
     });
   }, []);
 
