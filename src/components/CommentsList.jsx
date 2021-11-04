@@ -38,7 +38,8 @@ const CommentsList = ({ url }) => {
       );
   };
 
-  if (comments?.length < 1) return <div>No Comments</div>;
+  if (comments?.length < 1)
+    return <div>No comments have been made on this post.</div>;
 
   return <div>{comments && listComments()}</div>;
 };
