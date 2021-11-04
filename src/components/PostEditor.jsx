@@ -8,7 +8,6 @@ const PostEditor = ({ editBody, setEditBody }) => {
     <Editor
       apiKey={process.env.REACT_APP_TinyCloud}
       onInit={(evt, editor) => (editorRef.current = editor)}
-      initialValue='<p>Enter blog post here</p>'
       value={editBody}
       onEditorChange={(newValue, editor) => setEditBody(newValue)}
       init={{
