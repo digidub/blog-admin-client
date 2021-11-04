@@ -6,7 +6,7 @@ The app allows an authorised user to create, read, update and delete blog posts 
 
 ## Project Link
 
-![Demo](https://i.imgur.com/77KGMdl.mp4.mov 'Blog API Frontend Demo')
+https://user-images.githubusercontent.com/71183055/140290415-83a2b653-9a4b-4402-8f6b-3551112d8a25.mov
 
 ## Skills Employed
 
