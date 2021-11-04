@@ -13,6 +13,7 @@ const NewPost = () => {
   const [editPublished, setEditPublished] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [submittedPostID, setSubmittedPostID] = useState(null);
 
   const handleTitleChange = (e) => {
     setEditTitle((editTitle) => e.target.value);
@@ -20,17 +21,22 @@ const NewPost = () => {
 
   const handleSaveChanges = (e) => {
     e.preventDefault();
-    const url = '/posts';
+    let url = '/posts';
+    if (submittedPostID) url = `/posts/${submittedPostID}`;
     const newPost = {
       title: editTitle,
       body: editBody,
       published: editPublished,
     };
     server
-      .create(url, newPost)
+      .update(url, newPost)
       .then((newPost) => {
+        console.log(newPost);
         setErrorMessage(null);
-        setSuccessMessage(`${newPost.title} successfully saved`);
+        setSuccessMessage(
+          `${newPost.title} successfully saved. You can edit this post below.`
+        );
+        setSubmittedPostID(newPost._id);
       })
       .catch((err) => {
         err.json().then((error) => {
