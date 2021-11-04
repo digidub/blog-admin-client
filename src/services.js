@@ -1,3 +1,8 @@
+const handleErrors = (res) => {
+  if (!res.ok) throw res;
+  return res.json();
+};
+
 const fetchAll = (url) => {
   const options = {
     method: 'GET',
@@ -21,18 +26,17 @@ const fetchPost = (url) => {
     .catch((err) => console.log(err));
 };
 
-const create = (url, title, body) => {
+const create = (url, newObject) => {
   const options = {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ title, body }),
+    body: JSON.stringify(newObject),
   };
-  fetch(url, options)
-    .then((res) => res.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
+  return fetch(url, options)
+    .then(handleErrors)
+    .then((data) => data);
 };
 
 const update = (url, newObject) => {
@@ -44,9 +48,8 @@ const update = (url, newObject) => {
     body: JSON.stringify(newObject),
   };
   return fetch(url, options)
-    .then((res) => res.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
+    .then(handleErrors)
+    .then((data) => data);
 };
 
 const remove = (url) => {
